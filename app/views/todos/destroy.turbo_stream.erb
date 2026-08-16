@@ -1,0 +1,21 @@
+<% filter = @filter %>
+<% stats = { total: Todo.count, active: Todo.active.count, done: Todo.done.count, percent: Todo.progress_percent } %>
+<% todos = Todo.filtered(filter).ordered %>
+
+<%= turbo_stream.replace "progress_panel" do %>
+  <div id="progress_panel">
+    <%= render "todos/progress", stats: stats %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "todo_filters", partial: "todos/filters", locals: { filter: filter, stats: stats } %>
+
+<%= turbo_stream.replace "todos" do %>
+  <div id="todos" class="forge-list" data-controller="list">
+    <% if todos.any? %>
+      <%= render todos %>
+    <% else %>
+      <%= render "todos/empty", filter: filter %>
+    <% end %>
+  </div>
+<% end %>

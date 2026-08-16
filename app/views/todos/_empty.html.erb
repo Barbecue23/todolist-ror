@@ -1,0 +1,15 @@
+<%# locals: (filter:) %>
+<div class="forge-empty" id="empty_state">
+  <div class="forge-empty__orb" aria-hidden="true"></div>
+  <h2 class="forge-empty__title">
+    <% case filter.to_s %>
+    <% when "active" %>
+      ไม่มีงานค้าง — สบายใจได้
+    <% when "done" %>
+      ยังไม่มีงานที่เสร็จ
+    <% else %>
+      พื้นที่ว่าง พร้อมหลอมงานแรก
+    <% end %>
+  </h2>
+  <p class="forge-empty__text">พิมพ์งานด้านบน แล้วเริ่มสร้างโมเมนตัมของวัน</p>
+</div>

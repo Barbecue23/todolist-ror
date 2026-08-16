@@ -1,0 +1,25 @@
+<section class="forge-stage" data-controller="composer">
+  <header class="forge-hero">
+    <p class="forge-kicker"><%= today_label %></p>
+    <h1 class="forge-brand" data-ambient-target="brand">FORGE</h1>
+    <p class="forge-tagline">หลอมงานวันนี้ให้คม — ทีละอย่าง ชัดเจน ไม่รก</p>
+
+    <div id="progress_panel">
+      <%= render "todos/progress", stats: @stats %>
+    </div>
+  </header>
+
+  <div class="forge-workspace">
+    <%= render "todos/form", todo: @todo, filter: @filter %>
+
+    <%= render "todos/filters", filter: @filter, stats: @stats %>
+
+    <div id="todos" class="forge-list" data-controller="list">
+      <% if @todos.any? %>
+        <%= render @todos %>
+      <% else %>
+        <%= render "todos/empty", filter: @filter %>
+      <% end %>
+    </div>
+  </div>
+</section>

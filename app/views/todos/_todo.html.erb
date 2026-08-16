@@ -1,0 +1,33 @@
+<%# locals: (todo:) %>
+<article id="<%= dom_id(todo) %>"
+         class="forge-item <%= 'is-done' if todo.completed %> priority-<%= priority_tone(todo.priority) %>"
+         data-list-target="item">
+  <%= button_to toggle_todo_path(todo, filter: @filter),
+        method: :patch,
+        class: "forge-check",
+        form: { class: "forge-check-form" },
+        aria: { label: todo.completed? ? "ทำเครื่องหมายว่ายังไม่เสร็จ" : "ทำเครื่องหมายว่าเสร็จแล้ว" } do %>
+    <span class="forge-check__ring" aria-hidden="true">
+      <svg viewBox="0 0 24 24" class="forge-check__mark" fill="none">
+        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  <% end %>
+
+  <div class="forge-item__body">
+    <p class="forge-item__title"><%= todo.title %></p>
+    <span class="forge-item__meta">
+      <span class="forge-priority"><%= { "high" => "สำคัญมาก", "medium" => "ปกติ", "low" => "ค่อยทำ" }[priority_tone(todo.priority)] %></span>
+    </span>
+  </div>
+
+  <%= button_to todo_path(todo, filter: @filter),
+        method: :delete,
+        class: "forge-delete",
+        form: { class: "forge-delete-form" },
+        aria: { label: "ลบงาน" } do %>
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  <% end %>
+</article>

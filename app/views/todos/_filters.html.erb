@@ -1,0 +1,15 @@
+<nav id="todo_filters" class="forge-filters" aria-label="ตัวกรองงาน">
+  <%= link_to "ทั้งหมด", filter_path("all"),
+        class: "forge-filter #{'is-active' if filter_active?('all')}" %>
+  <%= link_to "ค้างอยู่", filter_path("active"),
+        class: "forge-filter #{'is-active' if filter_active?('active')}" %>
+  <%= link_to "เสร็จแล้ว", filter_path("done"),
+        class: "forge-filter #{'is-active' if filter_active?('done')}" %>
+
+  <% if stats[:done].positive? %>
+    <%= button_to "ล้างที่เสร็จ", clear_completed_todos_path(filter: filter),
+          method: :delete,
+          class: "forge-filter forge-filter--danger",
+          form: { data: { turbo_confirm: "ลบงานที่เสร็จแล้วทั้งหมด?" } } %>
+  <% end %>
+</nav>

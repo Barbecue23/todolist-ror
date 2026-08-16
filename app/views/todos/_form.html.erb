@@ -1,0 +1,28 @@
+<%= form_with model: todo, url: todos_path(filter: filter),
+      id: "new_todo",
+      class: "forge-composer",
+      data: { composer_target: "form" } do |f| %>
+  <label class="forge-composer__label" for="todo_title">งานใหม่</label>
+  <div class="forge-composer__row">
+    <%= f.text_field :title,
+          id: "todo_title",
+          class: "forge-composer__input",
+          placeholder: "พิมพ์สิ่งที่ต้องทำ แล้วกด Enter…",
+          autocomplete: "off",
+          autofocus: true,
+          data: { composer_target: "input" } %>
+    <%= f.select :priority,
+          options_for_select([
+            ["สูง", Todo::PRIORITIES[:high]],
+            ["กลาง", Todo::PRIORITIES[:medium]],
+            ["ต่ำ", Todo::PRIORITIES[:low]]
+          ], todo.priority || Todo::PRIORITIES[:medium]),
+          {},
+          class: "forge-composer__priority",
+          aria: { label: "ความสำคัญ" } %>
+    <%= f.submit "เพิ่ม", class: "forge-composer__submit" %>
+  </div>
+  <% if todo.errors.any? %>
+    <p class="forge-error"><%= todo.errors.full_messages.to_sentence %></p>
+  <% end %>
+<% end %>

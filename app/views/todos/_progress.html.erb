@@ -1,0 +1,30 @@
+<%# locals: (stats:) %>
+<div class="forge-progress" data-controller="progress" data-progress-percent-value="<%= stats[:percent] %>">
+  <div class="forge-progress__copy">
+    <span class="forge-progress__label">ความคืบหน้าวันนี้</span>
+    <strong class="forge-progress__value">
+      <span data-progress-target="number"><%= stats[:percent] %></span>%
+    </strong>
+  </div>
+
+  <div class="forge-progress__track" role="progressbar"
+       aria-valuenow="<%= stats[:percent] %>" aria-valuemin="0" aria-valuemax="100"
+       aria-label="ความคืบหน้า">
+    <div class="forge-progress__fill" data-progress-target="fill" style="width: <%= stats[:percent] %>%"></div>
+  </div>
+
+  <dl class="forge-progress__stats">
+    <div>
+      <dt>ทั้งหมด</dt>
+      <dd id="stat_total"><%= stats[:total] %></dd>
+    </div>
+    <div>
+      <dt>ค้าง</dt>
+      <dd id="stat_active"><%= stats[:active] %></dd>
+    </div>
+    <div>
+      <dt>เสร็จ</dt>
+      <dd id="stat_done"><%= stats[:done] %></dd>
+    </div>
+  </dl>
+</div>
