@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: workshop-todolist
+    runtime: docker
+    plan: starter
+    healthCheckPath: /up
+    disk:
+      name: rails-storage
+      mountPath: /rails/storage
+      sizeGB: 1
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
