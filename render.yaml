@@ -2,7 +2,7 @@ services:
   - type: web
     name: workshop-todolist
     runtime: docker
-    plan: starter
+    plan: free
     healthCheckPath: /up
     disk:
       name: rails-storage

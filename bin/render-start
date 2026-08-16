@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+export RAILS_ENV="${RAILS_ENV:-production}"
+export RACK_ENV="${RACK_ENV:-$RAILS_ENV}"
+
+bundle exec rails db:prepare
+exec bundle exec puma -t 5:5 -p "${PORT:-3000}" -e "$RAILS_ENV"
